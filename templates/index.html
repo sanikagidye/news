@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Sentiment Analysis</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>News Sentiment Analysis</h1>
+        <form method="POST">
+            <label for="company">Company Name:</label>
+            <input type="text" id="company" name="company" required>
+            
+            <label for="start_date">Start Date:</label>
+            <input type="date" id="start_date" name="start_date" required>
+            
+            <label for="end_date">End Date:</label>
+            <input type="date" id="end_date" name="end_date" required>
+            
+            <button type="submit">Search</button>
+        </form>
+        
+        {% if report %}
+        <h2>Report for {{ company }}</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Publication</th>
+                    <th>Link</th>
+                    <th>Sentiment</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in report %}
+                <tr>
+                    <td>{{ item.title }}</td>
+                    <td>{{ item.publication }}</td>
+                    <td><a href="{{ item.link }}" target="_blank">Read More</a></td>
+                    <td>{{ item.sentiment }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+    </div>
+</body>
+</html>
